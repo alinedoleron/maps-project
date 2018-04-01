@@ -1,0 +1,25 @@
+#root, #app, #map {
+  height: 100%;
+}
+
+#app {
+  display: flex;
+}
+
+#state {
+  width: 200px;
+  float: left;
+}
+
+#map {
+  width: 80%;
+}
+.menu {
+  width: 20%;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
