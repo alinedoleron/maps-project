@@ -5,7 +5,6 @@ import './index.css';
 export default class Menu extends React.Component {
     constructor(props) {
         super(props);
-        console.log('The plases are:' + this.props.places);
     }
 
     render() {

@@ -16,7 +16,8 @@ export default class Map extends React.Component {
       {name: 'Pizza Hut', lat:  -8.1110259, lng: -34.8974302, selected: false },
       {name: 'Tay San', lat: -8.1142982, lng: -34.8999599, selected: false},
       {name: '50 Sabores', lat: -8.1073439, lng: -34.8920895, selected: false}
-      ]
+      ],
+      searchResult: []
     }
 
     this.handleChange = this.handleChange.bind(this);
@@ -25,30 +26,60 @@ export default class Map extends React.Component {
 
   handleClick(e) {
     e.preventDefault();
-    console.log('Vc digitou: '+ this.state.searchValue);
   }
 
   handleChange(e) {
     this.setState({searchValue: e.target.value});
+
+    let placeSearch = e.target.value;
+
+    let placeFound = this.state.places.filter(place => place.name.indexOf(placeSearch) > -1);
+
+    this.renderDropdown(placeSearch, placeFound);
+
+    this.renderMap(placeFound);
   }
 
+  renderDropdown(placeSearch, placeFound) {
+    if(placeSearch && placeFound) {
+      this.setState({searchResult: placeFound});
+    }
+    else {
+      this.setState({searchResult: this.state.places});
+    }
+  }
 
-  componentDidMount() {
+  renderMap(places) {
     let boaViagem = {lat: -8.1297506, lng: -34.9091169};
     let map = new window.google.maps.Map(document.getElementById('map'), {
       center: boaViagem,
       zoom: 15
     });
 
-    this.state.places.map(function (place) {
+    places.map(function (place) {
       var marker = new window.google.maps.Marker({
         position: {lat: place.lat, lng: place.lng},
-        map: map
+        map: map,
+        animation: window.google.maps.Animation.DROP
+      });
+      
+      marker.addListener('click', () => {
+        if(marker.getAnimation()) {
+          marker.setAnimation(null);
+        }
+        else {
+          marker.setAnimation(window.google.maps.Animation.BOUNCE)
+        }
       });
     });
   }
 
-  
+  componentDidMount() {
+
+    this.renderDropdown();
+
+    this.renderMap(this.state.places);
+  }
 
   render() {
     return (
@@ -62,7 +93,7 @@ export default class Map extends React.Component {
               </div>
             </div>
           </form>
-          <Menu places={this.state.places}/>
+          <Menu places={this.state.searchResult}/>
         </div>
         <div id='info'></div>
         <div id='map' />
