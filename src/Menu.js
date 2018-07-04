@@ -5,12 +5,18 @@ import './index.css';
 export default class Menu extends React.Component {
     constructor(props) {
         super(props);
+
+        this.animateMarker = this.animateMarker.bind(this);
+    }
+
+    animateMarker(index) {
+        new window.google.maps.event.trigger(this.props.places[index].marker, 'click' );
     }
 
     render() {
             var placeList = this.props.places.map(function(place, index){
-                return <a href="#" className="list-group-item list-group-item-action" key={ index }>{place.name}</a>;
-            }) 
-            return   <div className="list-group">{ placeList }</div>
+                return <li className="list-group-item list-group-item-very-dark list-group-item-action" onClick={this.animateMarker.bind(this, index)} key={index}>{place.name}</li>;
+            }.bind(this)); 
+            return   <ul className="list-group">{ placeList }</ul>
         }
 };

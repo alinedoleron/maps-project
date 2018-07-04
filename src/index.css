@@ -1,25 +1,114 @@
-#root, #app, #map {
-  height: 100%;
-}
-
-#app {
-  display: flex;
-}
-
-#state {
-  width: 200px;
-  float: left;
-}
-
-#map {
-  width: 80%;
-}
-.menu {
-  width: 20%;
-}
-
 html, body {
   height: 100%;
   margin: 0;
   padding: 0;
+}
+.app {
+  display: block;
+}
+.app-map {
+  height: 100vh;
+}
+
+.btn-clear {
+  background-color: #6c757d;
+  color: #fff;
+}
+
+.btn-clear:hover {
+  background-color: #6c757d;
+  color: rgb(185, 185, 185);
+}
+
+.card-sm {
+  width: 150px;
+  font-size: 8px;
+  padding: 5px 3px;
+}
+
+.cards-area {
+  background-color: #141414;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.card-body {
+  background-color: #fff;
+  padding: 5px;
+  text-align: center;
+}
+
+.error {
+  color: #6c757d;
+  padding: 5px;
+}
+
+.hidden {
+  display: none;
+}
+
+.menu {
+  padding: 0;
+  background-color: #141414;
+}
+
+.list-group-item-very-dark {
+  color: #fff;
+  background-color: #141414;
+  border-color: #141414;
+}
+
+.list-group-item-very-dark:hover {
+  color: #fff;
+  text-decoration: none;
+  background-color: #454a50;
+  cursor: pointer;
+}
+
+.source-flickr {
+  background-color: #141414;
+  color: #fff;
+  font-size: 10px;
+  opacity: 1;
+  -webkit-transition: opacity .15s ease-in-out;
+  transition: opacity .15s ease-in-out;
+  padding: 5px 15px 0;
+}
+
+
+
+
+/* Small devices (landscape phones, 576px and up) */
+@media (max-width: 767.98px) { 
+  .app-map.row {
+    flex-wrap: wrap;
+  }
+  .col-map {
+    width: 60%;
+  }
+  
+  .col-menu {
+    width: 40%;
+  }
+
+  .input-group input {
+    font-size: 10px;
+  }
+
+  .list-group-item {
+    font-size: 10px;
+  }
+}
+
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 640px){ 
+  .col-map {
+    width: 80%;
+  }
+  
+  .col-menu {
+    width: 20%;
+  }
 }
