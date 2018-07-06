@@ -22,6 +22,7 @@ export default class Map extends React.Component {
       {name: 'Instituto Ricardo Brennand', tags: ['brennand'],lat:-8.0642113, lng: -34.9636231, marker: ''},
       {name: 'Parque da Jaqueira', tags: ['parque da jaqueira'],lat:-8.0371023, lng: -34.9059151, marker: ''}
       ],
+      open: true,
       searchResult: [],
       error: ''
     }
@@ -32,94 +33,99 @@ export default class Map extends React.Component {
 
     this.closePlace = this.closePlace.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.toggleMenu = this.toggleMenu.bind(this);
   }
 
+  ensureOpen() {
+    if(!this.state.open) {
+      this.setState({open: true});
+    }
+  }
+
+  toggleMenu() {
+    this.setState({open: !this.state.open});
+  }
+
+  loadMap(){
+    this.map = new window.google.maps.Map(document.getElementById('map'), {
+      center: {lat: -8.076316, lng: -34.9213467},
+      zoom: 13
+    });
+  }
+
+  addMarkers() {
+    this.state.places.map((place) => {
+      let imageDefault = this.mountImage(this.redMarker, this.scaledSize)
+      let marker = new window.google.maps.Marker({
+        position: {lat: place.lat, lng: place.lng},
+        map: this.map,
+        animation: window.google.maps.Animation.DROP,
+        icon: imageDefault
+      });
+
+      place.marker = marker;
+      
+      marker.addListener('click', () => {
+        this.switchMarker(place);
+        this.getImages(place);
+
+        this.map.panTo(marker.getPosition());
+        this.setState({placeSelected: place});
+      });
+    });
+  }
+
+  //Handle input search
   handleChange(e) {
     this.setState({searchValue: e.target.value});
 
     let placeSearch = e.target.value;
 
-    let placeFound = this.state.places.filter(place => { 
-      let placeName = place.name.toLowerCase()
-      placeName.indexOf(placeSearch.toLowerCase()) > -1
-    });
+    let placesFound = this.state.places.filter(place =>  
+      place.name.toLowerCase().indexOf(placeSearch.toLowerCase()) > -1
+    );
     
-  
-    this.renderDropdown(placeSearch, placeFound);
-
-    if(this.state.searchResult.length != placeFound.length) {
-      this.renderMap(placeFound);
-    }
+    this.renderPlaces(placesFound);
   }
 
-  renderDropdown(placeSearch, placeFound) {
-    if(placeSearch && placeFound) {
-      this.setState({searchResult: placeFound});
-    }
-    else {
-      this.setState({searchResult: this.state.places});
-    }
+  renderPlaces(places) {
+    this.setState({searchResult: places});
+    places.map((place) => place.marker.setVisible(true));
+
+    let selectedPlaces = new Set(places);
+    
+    this.state.places.map((place) => {
+      if (!selectedPlaces.has(place))
+        place.marker.setVisible(false);
+    })
   }
 
-  resetMarkers() {
-    var place = this.state.placeSelected;
-    if(place && place.marker) {
+  // Switches between the markers
+  switchMarker(newPlace) {
+    let place = this.state.placeSelected;
+    this.ensureOpen();
+    if(place) {
       place.marker.setIcon(this.mountImage(this.redMarker, this.scaledSize));
-      this.setState({placeSelected: place});
     }
-    this.setState({placeSelected: ''});
+    if (newPlace){
+      let newMarker = newPlace.marker;
+      newMarker.setIcon(this.mountImage(this.yellowMarker, this.scaledSize));
+      newMarker.setAnimation(window.google.maps.Animation.BOUNCE);
+      setTimeout(() => newMarker.setAnimation(null), 750);
+      this.setState({placeSelected: newPlace});
+    } else {
+      this.setState({placeSelected: ''});
+    }
   }
 
   mountImage(url, size) {
-    return ({
+    return {
       url: url,
       scaledSize: size
-    });
+    };
   }
 
-  renderMap(places) {
-    let inital = {lat: -8.076316, lng: -34.9213467};
-    let map = new window.google.maps.Map(document.getElementById('map'), {
-      center: inital,
-      zoom: 13
-    });
-
-    places.map((place) => {
-      let imageDefault = this.mountImage(this.redMarker, this.scaledSize)
-
-      let marker = new window.google.maps.Marker({
-        position: {lat: place.lat, lng: place.lng},
-        map: map,
-        animation: window.google.maps.Animation.DROP,
-        icon: imageDefault
-      });
-
-      
-
-      marker.addListener('click', () => {
-
-        this.resetMarkers(imageDefault);
-
-        this.getImages(place);
-
-        map.setCenter(marker.getPosition());  
-
-        marker.setIcon(this.mountImage(this.yellowMarker, this.scaledSize));
-
-        marker.setAnimation(window.google.maps.Animation.BOUNCE);
-
-        setTimeout(function(){ marker.setAnimation(null); }, 750);
-
-        place.marker = marker;
-
-        this.setState({placeSelected: place});
-
-      });
-
-      place.marker = marker;  
-    });
-  }
-
+  // Fetch images from Flicker API
   getImages(place) {
     let tags = place.tags.join();
     let flickrPhotosRequest = 'https://api.flickr.com/services/rest/?method='+
@@ -132,7 +138,6 @@ export default class Map extends React.Component {
       .then(res => res.json())
       .then(
         (result) => {
-          console.log(result);
           result.photos.photo.map(photo => {
             let farmId = photo.farm;
             let serverId = photo.server;
@@ -149,7 +154,7 @@ export default class Map extends React.Component {
             photoData.push({url: url, ownerName: ownername});
           });
           place.photos = photoData;
-          this.setState({placeSelected: place});
+          this.setState({placeSelected: place, error: ''});
         },
 
         (error) => {
@@ -159,52 +164,60 @@ export default class Map extends React.Component {
   }
 
   closePlace() {
-    this.resetMarkers();
+    this.switchMarker();
   }
 
   componentDidMount() {
-
-    this.renderDropdown();
-
-    this.renderMap(this.state.places);
-
+    this.loadMap();
+    this.addMarkers();
+    this.renderPlaces(this.state.places);
   }
 
   render() {
     return (
-      <div id='app' className='container-fluid'>
-        <div className='app-map row'>
-          <div className={!this.state.placeSelected ? 'menu col-menu': 'hidden'}>
-            <div className='input-group'>
-              <input type='text' className='form-control' placeholder='Type a place' onChange={this.handleChange} value={this.state.searchValue}/>
-              <div className="input-group-append">
-              <button onClick={this.handleChange} className='btn btn-clear btn-outline-secondary' type='button'>x</button>
+      <div>
+        <header>
+          <nav className="navbar navbar-dark bg-dark ">
+            <a className="navbar-brand" href="#">Recife</a>
+            <button className="navbar-toggler" type="button" onClick={this.toggleMenu}>
+              <span className="navbar-toggler-icon"></span>
+            </button>
+          </nav>
+        </header>
+        <div id="app" className="container-fluid">
+          <div className="app-map row">
+            {/* Main menu with search and  Recife places*/}
+            <div className={!this.state.placeSelected ? (this.state.open ? 'menu col-menu' : 'menu col-menu collapse'): 'hidden'}>
+              <div className='input-group'>
+                <input type='text' className='form-control' placeholder='Type a place' onChange={this.handleChange} value={this.state.searchValue}/>
+                <div className="input-group-append">
+                  <button onClick={this.handleChange} className='btn btn-clear btn-outline-secondary' type='button'>x</button>
+                </div>
               </div>
+              <Menu places={this.state.searchResult}/>
             </div>
-            <Menu places={this.state.searchResult}/>
+            {/* Menu with selected place pictures */}
+            <div className={this.state.placeSelected ? (this.state.open ? 'menu col-menu' : 'menu col-menu collapse'): 'hidden'}>
+              <div className='pictures'>
+                <nav className='navbar navbar-light bg-light'>
+                    <span className='navbar-text'>
+                        {this.state.placeSelected.name}
+                    </span>
+                    <button onClick={this.closePlace}  type='button' className='close'>
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </nav>
+                <div className='source-flickr'>Fonte: Flickr</div>
+                <Info className={!this.state.error ? '' : 'hidden'} placeSelected={this.state.placeSelected}/>
+                <div className={this.state.error ? 'error' : 'hidden'}>
+                  {this.state.error.message}
+                </div>
+              </div>  
+            </div>
+            <div id="map" className={this.state.open ? "col-map" : "col-map full"}/>
           </div>
-          <div className={this.state.placeSelected ? 'menu col-menu': 'hidden'}>
-            <div className='pictures'>
-              <nav className='navbar navbar-light bg-light'>
-                  <span className='navbar-text'>
-                      {this.state.placeSelected.name}
-                  </span>
-                  <button onClick={this.closePlace}  type='button' className='close'>
-                      <span aria-hidden="true">×</span>
-                  </button>
-              </nav>
-              <div className='source-flickr'>Fonte: Flickr</div>
-              <Info className={!this.state.error ? '' : 'hidden'} placeSelected={this.state.placeSelected}/>
-              <div className={this.state.error ? 'error' : 'hidden'}>
-                {this.state.error.message}
-              </div>
-            </div>      
-          </div>
-
-          <div id='map' className='col-map' />
-          
         </div>
       </div>
     );
   }
-};
+}

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<!-- saved from url=(0023)http://localhost:3000/# -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style type="text/css">.gm-style-pbc{transition:opacity ease-in-out;background-color:rgba(0,0,0,0.45);text-align:center}.gm-style-pbt{font-size:22px;color:white;font-family:Roboto,Arial,sans-serif;position:relative;margin:0;top:50%;-webkit-transform:translateY(-50%);-ms-transform:translateY(-50%);transform:translateY(-50%)}
+</style><style data-styles="">ion-icon{visibility:hidden}.hydrated{visibility:inherit}</style>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Google Maps</title>
+    <link rel="stylesheet" href="./Google Maps_files/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="./Google Maps_files/js"></script>
+  <script src="./Google Maps_files/ionicons.oujamam7.js" type="module" crossorigin="true" data-resources-url="https://unpkg.com/ionicons@4.2.4/dist/ionicons/" data-namespace="ionicons"></script><style type="text/css">html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+.app {
+  display: block;
+}
+
+.input-group {
+  padding: 10px 10px;
+}
+
+.menu {
+  height: 100vh;
+  overflow-y: auto;
+  padding: 0;
+  background-color: #141414;
+  -webkit-transition: margin 0.3s ease;
+  -o-transition: margin 0.3s ease;
+  transition: margin 0.3s ease;
+}
+
+.map {
+  height: 100vh;
+}
+
+.btn-clear {
+  background-color: #6c757d;
+  color: #fff;
+}
+
+.btn-clear:hover {
+  background-color: #6c757d;
+  color: rgb(185, 185, 185);
+}
+
+.card-sm {
+  font-size: 8px;
+  padding: 5px 3px;
+  margin-bottom: 22px;
+}
+
+.cards-area {
+  background-color: #141414;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -ms-flex-pack: center;
+      justify-content: center;
+}
+
+.card-body {
+  background-color: #fff;
+  padding: 5px;
+  text-align: center;
+}
+
+.error {
+  color: #6c757d;
+  padding: 5px;
+}
+
+.hidden {
+  display: none;
+}
+
+
+
+.list-group-item-very-dark {
+  color: #fff;
+  background-color: #141414;
+  border-color: #141414;
+}
+
+.list-group-item-very-dark:hover {
+  color: #fff;
+  text-decoration: none;
+  background-color: #454a50;
+  cursor: pointer;
+}
+
+.source-flickr {
+  background-color: #141414;
+  color: #fff;
+  font-size: 10px;
+  opacity: 1;
+  -webkit-transition: opacity .15s ease-in-out;
+  -o-transition: opacity .15s ease-in-out;
+  transition: opacity .15s ease-in-out;
+  padding: 5px 15px 0;
+}
+
+.toogler {
+  width: 40px;
+  height: 40px;
+  margin: 10px 10px;
+  position: absolute;
+}
+
+/* Extra small devices (portrait phones, less than 576px) */
+@media (max-width: 575.98px) { 
+  .app-map.row {
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+  }
+
+  .col-map {
+    width: 60%;
+  }
+  
+  .col-menu {
+    width: 40%;
+  }
+
+  .input-group input {
+    font-size: 10px;
+  }
+
+  .list-group-item {
+    font-size: 10px;
+  }
+
+  .navbar-text {
+    font-size: 10px;
+  }
+
+}
+
+/*  Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) and  (max-width: 1199.98px) { 
+  .app-map.row {
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+  }
+
+  .col-map {
+    width: 70%;
+  }
+  
+  .col-menu {
+    width: 30%;
+  }
+
+  .navbar-text {
+    font-size: 12px;
+  }
+}
+
+/* // Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) { 
+  .app-map.row {
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap;
+  }
+
+  .col-map {
+    width: 80%;
+  }
+  
+  .col-menu {
+    width: 20%;
+  }
+
+  .col-menu.collapse {
+    margin-left: -20%;
+  }
+
+  .card-sm {
+    height: 150px;
+    width: 150px;
+  }
+}</style><script type="text/javascript" charset="UTF-8" src="./Google Maps_files/common.js"></script><script type="text/javascript" charset="UTF-8" src="./Google Maps_files/util.js"></script><script type="text/javascript" charset="UTF-8" src="./Google Maps_files/map.js"></script><script type="text/javascript" charset="UTF-8" src="./Google Maps_files/marker.js"></script><style type="text/css">.gm-style {
+        font: 400 11px Roboto, Arial, sans-serif;
+        text-decoration: none;
+      }
+      .gm-style img { max-width: none; }</style><script type="text/javascript" charset="UTF-8" src="./Google Maps_files/onion.js"></script><style type="text/css">@-webkit-keyframes _gm3978 {
+0% { -webkit-transform: translate3d(0px,-500px,0); -webkit-animation-timing-function: ease-in; }
+50% { -webkit-transform: translate3d(0px,0px,0); -webkit-animation-timing-function: ease-out; }
+75% { -webkit-transform: translate3d(0px,-20px,0); -webkit-animation-timing-function: ease-in; }
+100% { -webkit-transform: translate3d(0px,0px,0); -webkit-animation-timing-function: ease-out; }
+}
+</style><script type="text/javascript" charset="UTF-8" src="./Google Maps_files/stats.js"></script></head>
+  <body>
+    <div id="root"><div id="app" class="container-fluid"><div class="app-map row"><div class="menu col-menu collapse"><div class="input-group"><input type="text" class="form-control" placeholder="Type a place" value=""><div class="input-group-append"><button class="btn btn-clear btn-outline-secondary" type="button">x</button></div></div><ul class="list-group"><li class="list-group-item list-group-item-very-dark list-group-item-action">Shopping Recife</li><li class="list-group-item list-group-item-very-dark list-group-item-action">Shopping Rio Mar</li><li class="list-group-item list-group-item-very-dark list-group-item-action">Marco Zero</li><li class="list-group-item list-group-item-very-dark list-group-item-action">Parque Dona Lindu</li><li class="list-group-item list-group-item-very-dark list-group-item-action">Instituto Ricardo Brennand</li><li class="list-group-item list-group-item-very-dark list-group-item-action">Parque da Jaqueira</li></ul></div><div class="hidden"><div class="pictures"><nav class="navbar navbar-light bg-light"><span class="navbar-text"></span><button type="button" class="close"><span aria-hidden="true">×</span></button></nav><div class="source-flickr">Fonte: Flickr</div><div class="cards-area"></div><div class="hidden"></div></div></div><div id="map" class="col-map" style="position: relative;overflow: hidden;width: 100%;"><div style="height: 100%; width: 100%; position: absolute; top: 0px; left: 0px; background-color: rgb(229, 227, 223);"><div class="gm-style" style="position: absolute; z-index: 0; left: 0px; top: 0px; height: 100%; width: 100%; padding: 0px; border-width: 0px; margin: 0px;"><div tabindex="0" style="position: absolute; z-index: 0; left: 0px; top: 0px; height: 100%; width: 100%; padding: 0px; border-width: 0px; margin: 0px; cursor: url(&quot;https://maps.gstatic.com/mapfiles/openhand_8_8.cur&quot;), default; touch-action: none;"><div style="z-index: 1; position: absolute; left: 50%; top: 50%; transform: translate(0px, 0px);"><div style="position: absolute; left: 0px; top: 0px; z-index: 100; width: 100%;"><div style="position: absolute; left: 0px; top: 0px; z-index: 0;"><div style="position: absolute; z-index: 1; transform: matrix(1, 0, 0, 1, -88, -101);"><div style="position: absolute; left: 0px; top: 0px; width: 256px; height: 256px;"><div style="width: 256px; height: 256px;"></div></div><div style="position: absolute; left: -256px; top: 0px; width: 256px; height: 256px;"><div style="width: 256px; height: 256px;"></div></div><div style="position: absolute; left: 256px; top: 0px; width: 256px; height: 256px;"><div style="width: 256px; height: 256px;"></div></div><div style="position: absolute; left: -512px; top: 0px; width: 256px; height: 256px;"><div style="width: 256px; height: 256px;"></div></div><div style="position: absolute; left: 512px; top: 0px; width: 256px; height: 256px;"><div style="width: 256px; height: 256px;"></div></div><div style="position: absolute; left: -768px; top: 0px; width: 256px; height: 256px;"><div style="width: 256px; height: 256px;"></div></div><div style="position: absolute; left: 768px; top: 0px; width: 256px; height: 256px;"><div style="width: 256px; height: 256px;"></div></div></div></div></div><div style="position: absolute; left: 0px; top: 0px; z-index: 101; width: 100%;"></div><div style="position: absolute; left: 0px; top: 0px; z-index: 102; width: 100%;"></div><div style="position: absolute; left: 0px; top: 0px; z-index: 103; width: 100%;"><div style="position: absolute; left: 0px; top: 0px; z-index: -1;"><div style="position: absolute; z-index: 1; transform: matrix(1, 0, 0, 1, -88, -101);"><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: 0px; top: 0px;"></div><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: -256px; top: 0px;"></div><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: 256px; top: 0px;"></div><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: -512px; top: 0px;"></div><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: 512px; top: 0px;"></div><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: -768px; top: 0px;"></div><div style="width: 256px; height: 256px; overflow: hidden; position: absolute; left: 768px; top: 0px;"></div></div></div><div style="width: 25px; height: 35px; overflow: hidden; position: absolute; left: 84px; top: 212px; z-index: 247; animation-duration: 500ms; animation-iteration-count: 1; animation-name: _gm3978;"><img alt="" src="./Google Maps_files/location_map_pin_red5.png" draggable="false" style="position: absolute; left: 0px; top: 0px; width: 25px; height: 35px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div style="width: 25px; height: 35px; overflow: hidden; position: absolute; left: 100px; top: 39px; z-index: 74; animation-duration: 500ms; animation-iteration-count: 1; animation-name: _gm3978;"><img alt="" src="./Google Maps_files/location_map_pin_red5.png" draggable="false" style="position: absolute; left: 0px; top: 0px; width: 25px; height: 35px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div style="width: 25px; height: 35px; overflow: hidden; position: absolute; left: 272px; top: -113px; z-index: -78; animation-duration: 500ms; animation-iteration-count: 1; animation-name: _gm3978;"><img alt="" src="./Google Maps_files/location_map_pin_red5.png" draggable="false" style="position: absolute; left: 0px; top: 0px; width: 25px; height: 35px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div style="width: 25px; height: 35px; overflow: hidden; position: absolute; left: 85px; top: 352px; z-index: 387; animation-duration: 500ms; animation-iteration-count: 1; animation-name: _gm3978;"><img alt="" src="./Google Maps_files/location_map_pin_red5.png" draggable="false" style="position: absolute; left: 0px; top: 0px; width: 25px; height: 35px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div style="width: 25px; height: 35px; overflow: hidden; position: absolute; left: -259px; top: -107px; z-index: -72; animation-duration: 500ms; animation-iteration-count: 1; animation-name: _gm3978;"><img alt="" src="./Google Maps_files/location_map_pin_red5.png" draggable="false" style="position: absolute; left: 0px; top: 0px; width: 25px; height: 35px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div style="width: 25px; height: 35px; overflow: hidden; position: absolute; left: 77px; top: -266px; z-index: -231; animation-duration: 500ms; animation-iteration-count: 1; animation-name: _gm3978;"><img alt="" src="./Google Maps_files/location_map_pin_red5.png" draggable="false" style="position: absolute; left: 0px; top: 0px; width: 25px; height: 35px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div></div><div style="position: absolute; left: 0px; top: 0px; z-index: 0;"><div style="position: absolute; z-index: 1; transform: matrix(1, 0, 0, 1, -88, -101);"></div></div></div><div class="gm-style-pbc" style="z-index: 2; position: absolute; height: 100%; width: 100%; padding: 0px; border-width: 0px; margin: 0px; left: 0px; top: 0px; opacity: 0;"><p class="gm-style-pbt"></p></div><div style="z-index: 3; position: absolute; height: 100%; width: 100%; padding: 0px; border-width: 0px; margin: 0px; left: 0px; top: 0px; touch-action: pan-x pan-y;"><div style="z-index: 4; position: absolute; left: 50%; top: 50%; transform: translate(0px, 0px);"><div style="position: absolute; left: 0px; top: 0px; z-index: 104; width: 100%;"></div><div style="position: absolute; left: 0px; top: 0px; z-index: 105; width: 100%;"></div><div style="position: absolute; left: 0px; top: 0px; z-index: 106; width: 100%;"><div class="gmnoprint" title="" style="width: 25px; height: 35px; overflow: hidden; position: absolute; opacity: 0.01; cursor: pointer; touch-action: none; left: 84px; top: 212px; z-index: 247;"><img alt="" src="./Google Maps_files/location_map_pin_red5.png" draggable="false" style="position: absolute; left: 0px; top: 0px; width: 25px; height: 35px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div class="gmnoprint" title="" style="width: 25px; height: 35px; overflow: hidden; position: absolute; opacity: 0.01; cursor: pointer; touch-action: none; left: 100px; top: 39px; z-index: 74;"><img alt="" src="./Google Maps_files/location_map_pin_red5.png" draggable="false" style="position: absolute; left: 0px; top: 0px; width: 25px; height: 35px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div class="gmnoprint" title="" style="width: 25px; height: 35px; overflow: hidden; position: absolute; opacity: 0.01; cursor: pointer; touch-action: none; left: 272px; top: -113px; z-index: -78;"><img alt="" src="./Google Maps_files/location_map_pin_red5.png" draggable="false" style="position: absolute; left: 0px; top: 0px; width: 25px; height: 35px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div class="gmnoprint" title="" style="width: 25px; height: 35px; overflow: hidden; position: absolute; opacity: 0.01; cursor: pointer; touch-action: none; left: 85px; top: 352px; z-index: 387;"><img alt="" src="./Google Maps_files/location_map_pin_red5.png" draggable="false" style="position: absolute; left: 0px; top: 0px; width: 25px; height: 35px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div class="gmnoprint" title="" style="width: 25px; height: 35px; overflow: hidden; position: absolute; opacity: 0.01; cursor: pointer; touch-action: none; left: -259px; top: -107px; z-index: -72;"><img alt="" src="./Google Maps_files/location_map_pin_red5.png" draggable="false" style="position: absolute; left: 0px; top: 0px; width: 25px; height: 35px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div class="gmnoprint" title="" style="width: 25px; height: 35px; overflow: hidden; position: absolute; opacity: 0.01; cursor: pointer; touch-action: none; left: 77px; top: -266px; z-index: -231;"><img alt="" src="./Google Maps_files/location_map_pin_red5.png" draggable="false" style="position: absolute; left: 0px; top: 0px; width: 25px; height: 35px; user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div></div><div style="position: absolute; left: 0px; top: 0px; z-index: 107; width: 100%;"></div></div></div></div><iframe frameborder="0" style="z-index: -1; position: absolute; width: 100%; height: 100%; top: 0px; left: 0px; border: none;" src="./Google Maps_files/saved_resource.html"></iframe></div></div></div></div></div></div>
+    <script src="./Google Maps_files/ionicons.js"></script>
+  <script type="text/javascript" src="./Google Maps_files/bundle.js"></script>
+<div style="position: absolute; left: 0px; top: -2px; height: 1px; overflow: hidden; visibility: hidden; width: 1px;"><span style="position: absolute; font-size: 300px; width: auto; height: auto; margin: 0px; padding: 0px; font-family: Roboto, Arial, sans-serif;">BESbswy</span></div></body></html>

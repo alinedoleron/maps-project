@@ -25,7 +25,6 @@ export default class Info extends React.Component {
             });
         }
 
-        
         return (
             <div className="cards-area">
                 { photos }
