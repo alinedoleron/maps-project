@@ -14,9 +14,14 @@ export default class Menu extends React.Component {
     }
 
     render() {
-            var placeList = this.props.places.map(function(place, index){
-                return <li className="list-group-item list-group-item-very-dark list-group-item-action" onClick={this.animateMarker.bind(this, index)} key={index}>{place.name}</li>;
-            }.bind(this)); 
-            return   <ul className="list-group">{ placeList }</ul>
+            var placeList = this.props.places.map((place, index) => {
+                return (
+                    <li className="list-group-item list-group-item-very-dark list-group-item-action" 
+                    onClick={this.animateMarker.bind(this, index)} key={index}>
+                        {place.name}
+                    </li>
+                );
+            }); 
+            return <ul className="list-group">{ placeList }</ul>
         }
 };

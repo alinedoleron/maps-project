@@ -10,6 +10,20 @@ html, body {
 
 }
 
+#error {
+  text-align: center;
+  position: sticky;
+  left: 50%;
+  color: #fff;
+  top: 50%;
+  font-size: x-large;
+  font-family: sans-serif;
+}
+
+.city-name {
+  color: #fff !important;
+}
+
 .col-map {
   width: 80%;
 }
@@ -168,7 +182,7 @@ html, body {
   .col-menu.collapse {
     margin-left: -20%;
   }
- 
+
   .col-menu {
     width: 30%;
   }

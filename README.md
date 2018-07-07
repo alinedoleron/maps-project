@@ -2,6 +2,8 @@
 
 > By Aline D'Oleron
 
+##### Project of Udacity Front-End Web Developer Nanodegree.
+
 This app lists some places of Recife city. The user can filter the places using a search field and check some pictures stored on Flickr.
 
 To create this app I followed this [project specification](https://review.udacity.com/#!/rubrics/440/view)
